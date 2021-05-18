@@ -17,7 +17,7 @@ class MovieController extends Controller
             'author' => 'required|string|max:50',
             'description' => 'required|string',
             'time' => 'required|numeric|digits_between:1,3',
-            'year' => 'required|numeric|min:1900|max:'.$year
+            'year' => 'required|numeric|min:1900|max:'.$year,
         ];
     }
     /**
@@ -70,9 +70,14 @@ class MovieController extends Controller
 
         // versione breve
         $data = $request->all();
+        if ( $data['image_path'] === null) {
+            unset($data['image_path']);
+        }
         $request->validate($this->requestValid);
 
         $movieNew = Movie::create($data);
+
+        
         return redirect()->route('movies.index')->with('message', 'Il film '.  $movieNew->title .' è stato aggiunto');
     }
 
@@ -132,7 +137,7 @@ class MovieController extends Controller
     {
 
         // elimino il film specifico
-        
+
         $movie->delete();
 
         return redirect()->route('movies.index')->with('message', 'Il film '. $movie->title . ' è stato eliminato');

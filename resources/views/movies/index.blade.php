@@ -13,24 +13,26 @@
             {{ session('message') }}
         </div>
     @endif
-    <table class="table table-striped">
+    <table class="table__movie table table-striped">
         <thead>
             <tr>
-            <th scope="col">Titolo</th>
-            <th scope="col">Regista</th>
-            <th scope="col">Durata</th>
-            <th scope="col">Anno</th>
-            <th scope="col">Azioni</th>
+                <th scope="col">Img</th>
+                <th scope="col">Titolo</th>
+                <th scope="col">Regista</th>
+                <th scope="col">Durata</th>
+                <th scope="col">Anno</th>
+                <th scope="col">Azioni</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($movies as $movie)
             <tr>
+                <td><img class="img__home" src="{{ $movie->image_path }}" alt=""></td>
                 <td>{{ $movie->title }}</td>
                 <td>{{ $movie->author }}</td>
                 <td>{{ $movie->time }} min</td>
                 <td>{{ $movie->year }}</td>
-                <td>
+                <td class="actions__table">
                     <a href="{{ route('movies.show',$movie->id) }}"><button type="button" class="btn btn-primary">Info</button></a>
                     <a href="{{ route('movies.edit',$movie->id) }}"><button type="button" class="btn btn-success">Modifica</button></a>
                     <form action="{{ route('movies.destroy', $movie->id) }}" method="post">

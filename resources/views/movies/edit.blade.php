@@ -37,6 +37,9 @@
             @endfor           
         </select>
 
+        <label for="image_path">Image Url</label>
+        <input class="form-control" type="text" id="image_path" name="image_path" placeholder="Durata" value="{{old('time') ? old('time') : $movie->image_path}}">
+
         <input class="btn btn-primary mt-3" type="submit" value="Invia">
     </form>
     <a href="{{ route('movies.index') }}">Homepage</a>
