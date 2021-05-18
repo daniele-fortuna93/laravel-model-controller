@@ -1,21 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
-    <body>
-        <ul>
-        @foreach ($movies as $movie)
-            <li>
-                <h2>{{ $movie->title }}</h2>
-                <h4>{{ $movie->author }}</h4>
-                <span>{{ $movie->time }} min</span>
-                <a href="{{ route('movies.show',$movie->id) }}">Dettagli film</a>
-            </li>
-        @endforeach
-        </ul>
-    </body>
-</html>
+@extends('layouts.main')
+
+@section('titlePage')
+    Home Page
+@endsection
+
+@section('content')
+    <div class="text-right">
+        <a href="{{ route('movies.create') }}"><button type="button" class="btn btn-success mb-3">Aggiungi film</button></a>
+    </div>
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Titolo</th>
+            <th scope="col">Regista</th>
+            <th scope="col">Durata</th>
+            <th scope="col">Anno</th>
+            <th scope="col">Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($movies as $movie)
+            <tr>
+                <td>{{ $movie->title }}</td>
+                <td>{{ $movie->author }}</td>
+                <td>{{ $movie->time }} min</td>
+                <td>{{ $movie->year }}</td>
+                <td>
+                    <a href="{{ route('movies.show',$movie->id) }}"><button type="button" class="btn btn-primary">Info</button></a>
+                    <a href="{{ route('movies.edit',$movie->id) }}"><button type="button" class="btn btn-success">Modifica</button></a>
+                    <form action="{{ route('movies.destroy', $movie->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+@endsection
