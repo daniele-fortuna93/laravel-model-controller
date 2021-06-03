@@ -27,7 +27,7 @@
         <tbody>
             @foreach ($movies as $movie)
             <tr>
-                <td><img class="img__home" src="{{ $movie->image_path }}" alt=""></td>
+                <td><img class="img__home" src="{{ $movie->image_path }}" alt="" style="width: 100px;"></td>
                 <td>{{ $movie->title }}</td>
                 <td>{{ $movie->author }}</td>
                 <td>{{ $movie->time }} min</td>

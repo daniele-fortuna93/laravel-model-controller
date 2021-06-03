@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
     <body>
-        <main class="container">
+        <main class="container mt-3">
             @yield('content')
         </main>
     </body>
